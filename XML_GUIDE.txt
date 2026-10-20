@@ -45,11 +45,21 @@ avoid collecting all batches in an aggregate node. This Python example is not
 an importable or verified n8n Cloud template.
 
 Verification scope
-10 local synthetic checks, including subprocess CLI success and zero stdout for
-a corrupt final batch. The authenticated HTTP branch is not yet tested live.
-The Actor has separate private cloud acceptance, including 90,000 records;
-those tests do not certify this reader's network integration. No customer data
-or new Actor runs were used for the example tests.
+19 local synthetic checks passed: 10 offline/CLI checks plus 9 mocked HTTP
+checks, covering validation failures, redirect policy and error redaction.
+On 20 October 2026, an authenticated HTTPS read of an existing synthetic owner
+run succeeded: 2 records, 165 output bytes, manifest/digest validation and exit
+code 0. TLS verification stayed enabled. No new Actor run or build was started.
+This verifies one small live HTTP happy path, not all input sizes or live
+redirect handling. Actual n8n Cloud execution remains untested. The Actor's
+separate 90,000-record acceptance does not certify this reader at that size.
+
+If Python reports a certificate verification error
+Check that your Python installation has a working CA trust bundle. In our Mac
+framework-Python test, its default CA file was missing; selecting the installed
+system bundle with SSL_CERT_FILE=/etc/ssl/cert.pem resolved it. That path is
+specific to that system: use your own installation's trusted CA bundle on other
+systems. Never disable TLS verification or use an unverified SSL context.
 
 Free alternatives
 Use Python XML parsers or a self-hosted worker if you prefer to maintain the
