@@ -29,4 +29,4 @@ A complete sentence.
 
 If your HTTP request times out, inspect the existing Apify run and its dataset before retrying. A lost response may hide a successful, charged run. Automatic replacement runs can duplicate processing. A rejected file has no successful-parsing event; review its error and fix the input first. Use only synthetic, redacted excerpts when asking for support.
 
-Prepared20October2026 from current parser error codes. Both Actor README updates are publicly verified; this standalone examples file is not yet publicly hosted.
+Prepared 20 October 2026 from current parser error codes. See each live Actor README for current limits and behavior.
