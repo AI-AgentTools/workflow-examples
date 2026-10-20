@@ -1,13 +1,19 @@
 """Explicit opt-in paid Actor example. Install apify-client; set APIFY_TOKEN privately."""
-import argparse,os,json
+import argparse,os,json,base64
 from pathlib import Path
 from datetime import timedelta
 
 def main():
     p=argparse.ArgumentParser(description='Upload one audio file and call Audio Chunk Preparer. Hosted usage is paid; local inspection is free.')
-    p.add_argument('file',type=Path);p.add_argument('--submit',action='store_true',help='Authorize upload and Actor call capped at USD0.03');p.add_argument('--output',type=Path,default=Path('audio-manifest.json'));args=p.parse_args()
+    p.add_argument('file',type=Path);mode=p.add_mutually_exclusive_group();mode.add_argument('--submit',action='store_true',help='Authorize upload and Actor call capped at USD0.03');mode.add_argument('--console-json',type=Path,help='Write local Console input for files up to 6,000,000 bytes; no network or token');p.add_argument('--output',type=Path,default=Path('audio-manifest.json'));args=p.parse_args()
     if not args.file.is_file() or not 0<args.file.stat().st_size<=64*1024*1024:raise SystemExit('Use a nonempty file no larger than64MiB')
     if args.file.suffix.lower() not in {'.mp3','.wav','.flac','.ogg'}:raise SystemExit('Supported: mp3,wav,flac,ogg')
+    if args.console_json:
+        with args.file.open('rb') as f: data=f.read(6_000_001)
+        if len(data)>6_000_000:raise SystemExit('Console JSON supports at most 6,000,000 bytes; use the signed upload route for larger files')
+        # Exclusive create prevents overwriting the source or an existing input file.
+        with args.console_json.open('x') as f:json.dump({'audioBase64':base64.b64encode(data).decode('ascii')},f)
+        print('Console JSON saved locally. It contains your audio; keep it private. No network call.');return
     if not args.submit:
         print('Local file check passed. No network call. Add --submit to upload and run (USD0.03 event cap).');return
     from apify_client import ApifyClient

@@ -6,6 +6,23 @@ This example is free MIT code. --submit makes a paid hosted Actor call; source
 uploads and retained account storage can have separate platform costs. The event
 cap is not a cap on every account service. No transcription is included.
 
+Console route for small files (no token or SDK required)
+The native Console "Upload new files" route was tested on 20 October 2026 and
+returned an unsigned storage URL that failed with UPLOAD_NOT_ACCESSIBLE.
+Use one of these alternatives; do not repeatedly retry the same unsigned URL.
+For files up to 6,000,000 bytes, with Python 3.10+:
+   python prepare_audio.py "recording.wav" --console-json audio-input.json
+This writes a NEW local file containing the audio as base64, without uploading
+or calling Apify. Existing files are never overwritten. Keep this file private.
+Open the Actor Input JSON editor, replace the entire input with that JSON,
+set maximum cost per run to USD0.03, and start only when ready to pay the event.
+The 30-minute limit still applies. File extension is checked locally; decoding
+and duration validation happen in the Actor. The generator is locally tested;
+its generated fixture matches the Actor base64 input contract, not a new live
+Console execution test. Remove the local JSON when no longer needed.
+For larger recordings, use the signed upload route below.
+
+Signed upload/API route
 1. Install Python3.10+ and apify-client (tested API signatures:3.3.0).
 2. Keep APIFY_TOKEN in your private environment. Never paste it in issues or code.
 3. First inspect a local file without network access:
