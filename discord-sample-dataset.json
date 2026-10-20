@@ -1,0 +1,82 @@
+[
+  {
+    "schemaVersion": "1.0",
+    "normalizedSource": "Synthetic release report @everyone\n\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\n\n```python\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\n```\n",
+    "segments": [
+      {
+        "type": "prose",
+        "sourceStart": 0,
+        "sourceEnd": 2787,
+        "messageIndexes": [
+          0,
+          1
+        ]
+      },
+      {
+        "type": "code",
+        "sourceStart": 2787,
+        "sourceEnd": 5771,
+        "messageIndexes": [
+          2,
+          3
+        ]
+      }
+    ],
+    "messages": [
+      {
+        "index": 0,
+        "sourceStart": 0,
+        "sourceEnd": 1986,
+        "payload": {
+          "content": "Synthetic release report @everyone\n\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\n",
+          "allowed_mentions": {
+            "parse": [],
+            "replied_user": false
+          }
+        }
+      },
+      {
+        "index": 1,
+        "sourceStart": 1986,
+        "sourceEnd": 2787,
+        "payload": {
+          "content": "Status line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\nStatus line: completed ✅\n\n",
+          "allowed_mentions": {
+            "parse": [],
+            "replied_user": false
+          }
+        }
+      },
+      {
+        "index": 2,
+        "sourceStart": 2797,
+        "sourceEnd": 4768,
+        "payload": {
+          "content": "```python\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\n\n```",
+          "allowed_mentions": {
+            "parse": [],
+            "replied_user": false
+          }
+        }
+      },
+      {
+        "index": 3,
+        "sourceStart": 4768,
+        "sourceEnd": 5767,
+        "payload": {
+          "content": "```python\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\nprint(\"synthetic example\")\n\n```",
+          "allowed_mentions": {
+            "parse": [],
+            "replied_user": false
+          }
+        }
+      }
+    ],
+    "messageCount": 4,
+    "omittedWhitespaceRanges": [],
+    "warnings": [
+      "INLINE_MARKDOWN_NOT_REBALANCED",
+      "UNICODE_GRAPHEME_BOUNDARIES_NOT_GUARANTEED"
+    ]
+  }
+]

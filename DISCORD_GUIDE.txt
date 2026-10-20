@@ -1,0 +1,30 @@
+Discord: release notes or an AI report -> ordered webhook bodies
+
+1. Run creatieve_naald/discord-message-preparer with {"text":"your report"}.
+   The hosted Actor costs USD0.01 per successfully prepared input, regardless
+   of the number of output parts. This local example itself is free and offline.
+2. Check the run succeeded. Export its default dataset as JSON to dataset.json.
+   Use a single run with exactly one dataset item. Review warnings and the
+   documented Markdown limits before deciding whether to send the result.
+3. Run: python3 discord_export_payloads.py dataset.json > payloads.ndjson
+   Check exit status is zero BEFORE processing the file. The program validates
+   the whole batch first. Each line is one complete Discord webhook body, with
+   content AND allowed_mentions; never send just the content field.
+4. In your existing sender, process these lines sequentially. POST each decoded
+   JSON object as the request body to your own Discord webhook. Keep the webhook
+   secret in that sender's credential store, never in Actor input or this file.
+   Stop on errors, respect Discord's rate-limit response, and record completed
+   indexes. Do not blindly retry an ambiguous timeout: it can duplicate messages.
+
+This example DOES NOT send messages, access Apify, or require tokens. It is not
+an imported n8n template or a tested Discord delivery integration. Message
+rendering remains unverified. Do not execute Actor runs just to try this example:
+discord-sample-dataset.json is synthetic output from the local parser. Its text includes
+an inert @everyone string so the preservation of allowed_mentions is visible.
+
+Local demonstration:
+  python3 discord_export_payloads.py discord-sample-dataset.json > sample-payloads.ndjson
+
+The generated sample has multiple parts and a split code block. A consumer must
+preserve file order. Output files contain the full source-derived content; use
+appropriate file permissions and retention for your own data.
