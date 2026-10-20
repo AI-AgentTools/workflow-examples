@@ -1,8 +1,30 @@
-# Agent Tools workflow examples
+# Agent Tools — file and message APIs for automated workflows
 
 Free, reusable examples for small AI and automation workflows. We maintain the **paid Apify Actors** linked below. The example code is MIT licensed; running a hosted Actor may incur charges. Check its current price and input limits first.
 
-## Start here
+**Turn awkward files and long messages into structured inputs your next workflow step can use.** Agent Tools provides small, bounded processing APIs on Apify, with reusable Python and n8n examples.
+
+## Find your starting point
+
+| Your workflow gets stuck here | Use this tool | What you get |
+| --- | --- | --- |
+| A contact has several phone numbers or email addresses | [VCF to JSON](https://apify.com/creatieve_naald/vcard-to-json) | Structured contact fields without keeping only the first value |
+| A generated report is too long for Telegram | [Telegram Message Preparer](https://apify.com/creatieve_naald/telegram-message-preparer) | Ordered text and entity payloads for your sender |
+| Your next step needs JPEG instead of an iPhone HEIC image | [HEIC to JPEG](https://apify.com/creatieve_naald/heic-to-jpeg-for-ai) | A resized JPEG from supported single-image HEIC input |
+| Subtitle text needs timestamps for search or retrieval | [SRT & VTT to JSON](https://apify.com/creatieve_naald/srt-vtt-to-json) | Cues and timestamped text chunks |
+| A long report exceeds Discord message limits | [Discord Message Preparer](https://apify.com/creatieve_naald/discord-message-preparer) | Ordered message payloads, including simple code fences |
+| Audio needs splitting before your transcription step | [Audio Chunk Preparer](https://apify.com/creatieve_naald/audio-chunk-preparer) | Timestamped mono WAV parts; transcription stays with your provider |
+| XML is too large to pass through a workflow as one JSON object | [XML Record Batcher](https://apify.com/creatieve_naald/xml-record-batcher) | Ordered NDJSON batches of at most 1 MiB, preserving XML structure |
+
+## Try one complete processing step
+
+1. Choose the tool above and read its current price, supported input and limits. Use its synthetic example first, not confidential data.
+2. Set a maximum run charge in Apify and run the example once. A hosted run can consume credit; these are paid tools.
+3. Inspect the successful run's output. Use the matching guide below to connect your own workflow. Message tools prepare payloads; they do not send them. Audio preparation does not transcribe.
+
+**Why use the hosted version?** Avoid installing and maintaining the processing dependency in your workflow environment. Reuse Apify authentication, run history and output storage. If a local library or your automation platform already handles the job, that may be the better choice; the guides explain the supported boundaries.
+
+## Examples and setup
 
 - **vCard import:** [preserve multiple phones, emails and labels](VCF_GUIDE.txt) with the Python adapter in [examples.py](examples.py).
 - **Telegram reports:** [prepare ordered text/entities payloads](TELEGRAM_GUIDE.txt) using Python or the [importable n8n workflow](n8n-telegram.json).
@@ -13,23 +35,11 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 
 Download this repository using **Code → Download ZIP**, extract it, and keep the guide and `examples.py` together. For n8n, import `n8n-telegram.json` and configure your own Apify Header Auth credential. The workflow contains synthetic input and no saved credentials. It prepares messages; it does not send them.
 
-## Choose a hosted tool
-
-| Task | Tool |
-| --- | --- |
-| Preserve repeated contact fields in structured JSON | [VCF to JSON](https://apify.com/creatieve_naald/vcard-to-json) |
-| Prepare Markdown as ordered Telegram payloads | [Telegram Message Preparer](https://apify.com/creatieve_naald/telegram-message-preparer) |
-| Convert supported single-image HEIC to bounded JPEG | [HEIC to JPEG for AI](https://apify.com/creatieve_naald/heic-to-jpeg-for-ai) |
-| Extract subtitle cues and timestamped chunks | [SRT & VTT to JSON](https://apify.com/creatieve_naald/srt-vtt-to-json) |
-| Split long text and simple code fences for Discord | [Discord Message Preparer](https://apify.com/creatieve_naald/discord-message-preparer) |
-| Prepare bounded audio files for your own transcription service | [Audio Chunk Preparer](https://apify.com/creatieve_naald/audio-chunk-preparer) |
-| Split large XML into ordered, bounded NDJSON batches | [XML Record Batcher](https://apify.com/creatieve_naald/xml-record-batcher) |
-
-[Agent Tools on Apify](https://apify.com/creatieve_naald). Free local libraries are alternatives when you prefer to maintain your own integration.
+[View the Agent Tools portfolio on Apify](https://apify.com/creatieve_naald). Start with one processing step and verify its output before connecting downstream actions.
 
 ## What has been tested
 
-The XML reader has 10 local synthetic checks; its authenticated HTTP branch is not yet tested live. The audio adapter was checked with a fake SDK; the Actor has separate synthetic cloud acceptance. No transcription provider or end-to-end n8n audio workflow was tested.
+The XML reader has 19 local checks, including mocked HTTP cases. Its real authenticated HTTPS path was also tested against one existing two-record synthetic owner run, including manifest and hash validation. This is not a live n8n Cloud test. The audio adapter was checked with a fake SDK; the Actor has separate synthetic cloud acceptance. No transcription provider or end-to-end n8n audio workflow was tested.
 
 The Discord adapter validates the whole batch before emitting NDJSON. Its synthetic sample and malformed cases were checked locally. Actual Discord delivery and visual rendering remain untested.
 
