@@ -17,13 +17,47 @@ Choose by task:
 - Split long Discord text and supported code fences into payloads:
   https://apify.com/creatieve_naald/discord-message-preparer
 
-Start with VCF_GUIDE.txt or TELEGRAM_GUIDE.txt. examples.py contains both Python
-adapters. n8n-telegram.json is an importable preparation workflow: attach your
-own Apify Header Auth credential after import. Never paste secrets in exports.
+- Prepare timestamped WAV parts before a transcription step:
+  https://apify.com/creatieve_naald/audio-chunk-preparer
+- Turn selected XML records into bounded NDJSON batches:
+  https://apify.com/creatieve_naald/xml-record-batcher
 
-Testing: Python adapters were checked with synthetic fixtures and mocked HTTP.
-The n8n template was imported and executed in n8n2.43.8 against local fixtures.
-This does not establish end-to-end live n8n delivery. Messaging tools prepare
-payloads only; the sender, retries and rate limits remain in your workflow.
+Choose your guide before installing anything:
+- VCF_GUIDE.txt: vCard imports; Python adapter in examples.py.
+- TELEGRAM_GUIDE.txt: Python adapter or n8n-telegram.json.
+- DISCORD_GUIDE.txt: offline payload export; no webhook required.
+- AUDIO_GUIDE.txt: local inspection, Console input preparation and optional submit.
+- XML_GUIDE.txt: read an existing successful run, or downloaded batches offline.
+- TROUBLESHOOTING.txt: HEIC and subtitle input checks.
 
-This collection is not a submission to or endorsement by the n8n template directory.
+First useful result
+1. Read the chosen Actor's supported inputs, limits and current price. A local
+   library may already meet your needs; the hosted option saves dependency setup.
+2. Try a synthetic example. For a hosted run, set the maximum charge explicitly
+   and wait for SUCCEEDED before passing output to another service.
+3. Inspect the output before connecting real data or enabling delivery. If a
+   request times out, inspect the existing run before starting another paid run.
+
+Free examples versus hosted processing
+Downloading these MIT examples and running their offline modes does not start
+an Actor. Hosted processing is paid; storage reads can also consume platform
+usage. The audio helper's --submit option starts a paid run. The XML reader
+reads an existing result and never starts an Actor. See each guide's commands
+and test scope before use; not all examples have an offline or n8n equivalent.
+
+Credentials and delivery
+For n8n-telegram.json, attach your own Apify Header Auth credential after import.
+Keep tokens in credentials or environment variables, never in exported JSON,
+URLs or issues. Message tools prepare payloads only; sending, retries and rate
+limits remain in your workflow. Audio preparation does not transcribe speech.
+
+Verification
+The Telegram n8n template was imported and executed in n8n 2.43.8 against local
+fixtures, not a complete live Apify-to-n8n-to-Telegram delivery test. The XML
+reader has a small authenticated HTTPS test on an existing synthetic run.
+Other example checks include synthetic fixtures and mocked services; consult
+the individual guides for their exact scope. No n8n-directory endorsement.
+
+If something fails, include the tool name, error code and a small synthetic
+reproduction in the appropriate issue: hosted Actor issues on Apify, example
+issues in this repository. Remove contact data, tokens and signed URLs first.
