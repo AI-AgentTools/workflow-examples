@@ -1,0 +1,51 @@
+Prepare audio parts for your existing transcription workflow
+
+Hosted tool: https://apify.com/creatieve_naald/audio-chunk-preparer
+Price at publication: USD0.03 per successfully prepared recording, all parts included.
+This example is free MIT code. --submit makes a paid hosted Actor call; source
+uploads and retained account storage can have separate platform costs. The event
+cap is not a cap on every account service. No transcription is included.
+
+1. Install Python3.10+ and apify-client (tested API signatures:3.3.0).
+2. Keep APIFY_TOKEN in your private environment. Never paste it in issues or code.
+3. First inspect a local file without network access:
+   python prepare_audio.py recording.mp3
+4. To explicitly upload and run:
+   python prepare_audio.py recording.mp3 --submit --output audio-manifest.json
+5. The result contains outputStoreId and manifest.chunks. For each chunk, use:
+   client.key_value_store(outputStoreId).get_record_as_bytes(chunk['recordKey'])
+   The returned ['value'] contains the WAV bytes. Send them to your own
+   transcription provider and add chunk['start_seconds'] to returned timestamps.
+6. Process in index order. Overlap repeats audio: deduplicate overlapping
+   transcript words rather than blindly concatenating transcripts.
+
+The script uploads to an unnamed Apify key-value store and obtains a record-level
+signed URL. It does not print the signature or put an account token into the URL.
+It saves sourceStoreId so you can manage input retention, and outputStoreId for
+output downloads. Review your account retention and remove sensitive recordings
+when no longer needed. It does not automatically delete your files.
+
+MP3/WAV/FLAC/Ogg only, maximum64MiB and30minutes, first audio stream. Output is
+16kHz mono PCM WAV; resampling/mixing can lose quality. No M4A/video, silence
+boundary detection, diarization or automatic transcript deduplication.
+Default300sec parts with1sec overlap; byte cap may shorten a part. For parameter
+changes use the Actor input options documented on Apify.
+
+n8n equivalent (recipe, not an importable or executed n8n template):
+- Upload your binary to your Apify key-value store using an authenticated HTTP
+  Request. Obtain a signed record URL using your SDK/service integration.
+- Run creatieve_naald/audio-chunk-preparer with audioFiles:[signedURL].
+- Wait for SUCCEEDED; inspect errors before any retry.
+- Fetch the default dataset manifest, split manifest.chunks into items, download
+  each recordKey from the run's defaultKeyValueStoreId into a binary field.
+- Pass that binary to your existing transcription node. Preserve index and
+  start_seconds. Keep all credentials in n8n credentials, not exported JSON.
+If an HTTP timeout occurs, the run may still exist: inspect it before retrying.
+
+Verification scope:
+The Actor was tested privately with synthetic MP3 and a30minute WAV upload,
+byte/duration checks and charging events. This published adapter was checked
+locally using a fake Apify SDK, including no-network default, invalid file,
+call cap, failed run, and output manifest. No live transcription, real customer
+recording, or end-to-end n8n execution has been tested for this example.
+Free alternative: FFmpeg or an audio-splitting community node on your own host.

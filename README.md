@@ -7,6 +7,7 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 - **vCard import:** [preserve multiple phones, emails and labels](VCF_GUIDE.txt) with the Python adapter in [examples.py](examples.py).
 - **Telegram reports:** [prepare ordered text/entities payloads](TELEGRAM_GUIDE.txt) using Python or the [importable n8n workflow](n8n-telegram.json).
 - **Discord reports:** [validate and export ordered webhook bodies](DISCORD_GUIDE.txt), with an [offline adapter](discord_export_payloads.py) and [synthetic sample](discord-sample-dataset.json). No sending or webhook credentials required.
+- **Audio preparation:** [upload audio and obtain timestamped WAV parts](AUDIO_GUIDE.txt) with [prepare_audio.py](prepare_audio.py). Local inspection is free; `--submit` explicitly calls the paid Actor.
 - **Troubleshooting:** [HEIC and subtitle input checks](TROUBLESHOOTING.txt).
 
 Download this repository using **Code → Download ZIP**, extract it, and keep the guide and `examples.py` together. For n8n, import `n8n-telegram.json` and configure your own Apify Header Auth credential. The workflow contains synthetic input and no saved credentials. It prepares messages; it does not send them.
@@ -20,10 +21,13 @@ Download this repository using **Code → Download ZIP**, extract it, and keep t
 | Convert supported single-image HEIC to bounded JPEG | [HEIC to JPEG for AI](https://apify.com/creatieve_naald/heic-to-jpeg-for-ai) |
 | Extract subtitle cues and timestamped chunks | [SRT & VTT to JSON](https://apify.com/creatieve_naald/srt-vtt-to-json) |
 | Split long text and simple code fences for Discord | [Discord Message Preparer](https://apify.com/creatieve_naald/discord-message-preparer) |
+| Prepare bounded audio files for your own transcription service | [Audio Chunk Preparer](https://apify.com/creatieve_naald/audio-chunk-preparer) |
 
 [Agent Tools on Apify](https://apify.com/creatieve_naald). Free local libraries are alternatives when you prefer to maintain your own integration.
 
 ## What has been tested
+
+The audio adapter was checked with a fake SDK; the Actor has separate synthetic cloud acceptance. No transcription provider or end-to-end n8n audio workflow was tested.
 
 The Discord adapter validates the whole batch before emitting NDJSON. Its synthetic sample and malformed cases were checked locally. Actual Discord delivery and visual rendering remain untested.
 
