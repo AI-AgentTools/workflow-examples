@@ -1,0 +1,7 @@
+This license covers only the original example code, workflow configuration and
+explanatory documents in this public-examples directory. It does not license
+Apify, n8n, Telegram, Discord, their trademarks, or the hosted Actor services.
+No n8n engine source or third-party library implementation is bundled.
+The examples were prepared for this project with AI assistance. All fixtures
+are synthetic and the workflow has no bound credentials. Service usage remains
+subject to each provider's terms and pricing. No trademark exclusivity claimed.

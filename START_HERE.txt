@@ -1,0 +1,29 @@
+AGENT TOOLS — Small utilities for AI workflows
+
+Practical hosted utilities with explicit limits and pay-per-use pricing.
+This collection contains workflow examples for our paid Apify Actors.
+Disclosure: we publish and maintain these Actors. Examples are free to read;
+running the hosted tools may incur charges. Check the live listing first.
+
+Choose by task:
+- Keep repeated phone numbers and emails in vCard imports:
+  https://apify.com/creatieve_naald/vcard-to-json
+- Prepare Markdown as ordered Telegram text/entities payloads:
+  https://apify.com/creatieve_naald/telegram-message-preparer
+- Convert supported single-image HEIC files for image workflows:
+  https://apify.com/creatieve_naald/heic-to-jpeg-for-ai
+- Extract subtitle cues and timestamped transcript chunks:
+  https://apify.com/creatieve_naald/srt-vtt-to-json
+- Split long Discord text and supported code fences into payloads:
+  https://apify.com/creatieve_naald/discord-message-preparer
+
+Start with VCF_GUIDE.txt or TELEGRAM_GUIDE.txt. examples.py contains both Python
+adapters. n8n-telegram.json is an importable preparation workflow: attach your
+own Apify Header Auth credential after import. Never paste secrets in exports.
+
+Testing: Python adapters were checked with synthetic fixtures and mocked HTTP.
+The n8n template was imported and executed in n8n2.43.8 against local fixtures.
+This does not establish end-to-end live n8n delivery. Messaging tools prepare
+payloads only; the sender, retries and rate limits remain in your workflow.
+
+This collection is not a submission to or endorsement by the n8n template directory.

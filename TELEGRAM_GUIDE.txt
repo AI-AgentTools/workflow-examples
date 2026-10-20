@@ -1,0 +1,32 @@
+Prepare long Markdown reports for Telegram without parse_mode
+
+Problem: long reports and formatting boundaries need preparation before sending.
+The Actor returns ordered text and Telegram entities. It does not send messages.
+
+Use examples.py from this folder:
+
+from pathlib import Path
+from examples import call_actor, telegram_payloads
+result = call_actor('telegram-message-preparer', 'markdown',
+                    Path('answer.md').read_text(encoding='utf-8'), '0.01')
+payloads = telegram_payloads(result)
+
+Set APIFY_TOKEN in your secret manager/environment. Review the result and send
+payloads sequentially with your own sender. Add chat_id and preserve entities.
+Do not also set parse_mode. Keep the bot token in your sender, not Actor input.
+Respect rate-limit responses and record successful deliveries. A timeout is
+ambiguous; blindly retrying a message or Actor call can duplicate work.
+
+For n8n, import n8n-telegram.json. Select an Apify Header Auth credential with
+Authorization: Bearer followed by your own token. Replace synthetic input with
+your upstream text. The workflow emits ordered prepared items for your sender.
+
+Price at preparation: USD0.01 per successful text bundle, maximum64KiB and
+20messages. Check current price and formatting limits on the listing:
+https://apify.com/creatieve_naald/telegram-message-preparer
+
+Local parsers are free alternatives; this hosted step avoids installing and
+maintaining one in your workflow environment. It does not guarantee delivery.
+The n8n example was tested locally using fixture responses, not a live end-to-end
+Apify-to-Telegram run. Existing separate Telegram acceptance is not proof of
+this complete workflow. We maintain the paid Actor linked above.

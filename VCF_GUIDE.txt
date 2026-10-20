@@ -1,0 +1,30 @@
+Keep multiple phone numbers when importing a vCard into a workflow
+
+Problem: mapping only the first phone or email can discard useful contact data.
+Our VCF Actor returns arrays and retains original fields and warnings.
+
+Use examples.py from this folder:
+
+from pathlib import Path
+from examples import call_actor, contact_rows
+result = call_actor('vcard-to-json', 'vcard_text',
+                    Path('contacts.vcf').read_text(encoding='utf-8'), '0.02')
+rows = contact_rows(result)
+
+Set APIFY_TOKEN via your secret manager/environment. Do not store it in code.
+Review warnings before writing to your CRM. Each row keeps all phones/emails;
+map arrays into a destination that supports multiple values, or retain them in
+an associated table. original retains labels and source fields. Overwriting a
+single CRM phone field repeatedly will still lose values at the destination.
+
+Price at preparation: USD0.02 per successful bundle, up to500 contacts.
+Check current listing and supported vCard dialect before using real data:
+https://apify.com/creatieve_naald/vcard-to-json
+
+A local vCard library is a free alternative if you maintain its installation
+and integration. The hosted option saves that deployment step. No claim of
+exclusive functionality or compatibility with every address-book exporter.
+
+Evidence: offline fixtures retain two phones, two emails and an Apple label.
+Your CRM integration is not tested by this example. A timed-out call may have
+started a paid run: inspect the existing run before retrying.
