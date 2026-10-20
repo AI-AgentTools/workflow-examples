@@ -1,0 +1,57 @@
+XML Record Batcher: consume a result without loading the entire document
+
+Our paid Actor: https://apify.com/creatieve_naald/xml-record-batcher
+This free MIT-licensed example reads an EXISTING successful result. It never
+starts an Actor or retries a failed job. Running the Actor separately costs
+$0.10 per successfully prepared document at publication; check current pricing.
+Downloading existing storage may consume platform transfer usage.
+
+1. Run XML Record Batcher with synthetic XML first. Choose recordTag, such as
+   item or urn:catalog|item. Wait for SUCCEEDED. Clear the inline sample when
+   supplying xmlFiles. Larger documents must already be in Apify storage;
+   external feed fetching, gzip and ZIP are not supported.
+2. Download read_xml_batches.py from this repository. Python 3.10+ standard
+   library only; no pip package required.
+3. Set your Apify token in APIFY_TOKEN through your normal secret manager.
+   Do not paste it into exported workflow JSON, URLs, issues or terminal history.
+4. Read the existing run (replace RUN_ID):
+   python read_xml_batches.py --run-id RUN_ID > records.ndjson
+5. Process records.ndjson line by line. Each object has index and element.
+   element contains tag, attributes, and ordered content (text or child nodes).
+   Business-field mapping is your workflow's responsibility.
+
+Offline mode, without credentials or network:
+Download OUTPUT as manifest.json and the listed batch files into one directory.
+   python read_xml_batches.py --directory downloaded-result > records.ndjson
+Use a new output filename. Shell redirection replaces an existing target file.
+
+Checks and resource behavior
+The reader restricts cloud requests to api.apify.com, rejects redirects,
+requires a successful run of our XML Actor, and checks batch-key syntax,
+manifest totals, per-batch byte limits, hashes, counts and consecutive indexes.
+It holds one batch (at most 1 MiB, plus parsed Python objects) at a time and
+stages up to 220 MiB on temporary disk before writing stdout. Temporary disk
+is therefore required. Nothing is emitted for validation failures, including a
+corrupt final batch. Disk/stdout failures after validation can still interrupt
+output; consume only a completed command with exit code 0. Existing redirected
+files can be created empty on failure. There is no automatic retry or new run.
+Missing/deleted/expired storage and changed records are errors, not instructions
+to run the paid Actor again. Inspect the original run before deciding.
+
+For n8n
+The architecture is: wait for a successful Actor run, read OUTPUT, then fetch one
+batch at a time and parse each NDJSON line. Keep APIFY_TOKEN in credentials and
+avoid collecting all batches in an aggregate node. This Python example is not
+an importable or verified n8n Cloud template.
+
+Verification scope
+10 local synthetic checks, including subprocess CLI success and zero stdout for
+a corrupt final batch. The authenticated HTTP branch is not yet tested live.
+The Actor has separate private cloud acceptance, including 90,000 records;
+those tests do not certify this reader's network integration. No customer data
+or new Actor runs were used for the example tests.
+
+Free alternatives
+Use Python XML parsers or a self-hosted worker if you prefer to maintain the
+whole conversion yourself. For small documents, a whole-document XML-to-JSON
+converter may be simpler. The hosted Actor's advantage is bounded output batches.
