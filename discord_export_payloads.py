@@ -16,11 +16,12 @@ def payloads(data):
     messages = item.get('messages')
     if not isinstance(messages, list) or not 1 <= len(messages) <= 50:
         raise ValueError('Expected 1 to 50 messages')
-    if item.get('messageCount') != len(messages):
+    if type(item.get('messageCount')) is not int or item['messageCount'] != len(messages):
         raise ValueError('Message count mismatch')
     result = []
     for index, message in enumerate(messages):
-        if not isinstance(message, dict) or message.get('index') != index:
+        if (not isinstance(message, dict) or type(message.get('index')) is not int
+                or message['index'] != index):
             raise ValueError('Messages must have consecutive indexes in order')
         body = message.get('payload')
         if not isinstance(body, dict) or set(body) != {'content', 'allowed_mentions'}:
