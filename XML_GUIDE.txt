@@ -25,6 +25,29 @@ Download OUTPUT as manifest.json and the listed batch files into one directory.
    python read_xml_batches.py --directory downloaded-result > records.ndjson
 Use a new output filename. Shell redirection replaces an existing target file.
 
+Keep an existing export intact on validation failure (POSIX shell)
+Run from the directory where you want records.ndjson. Create the temporary file
+beside the destination, so the final rename stays on the same filesystem:
+
+   tmp=$(mktemp ./records.ndjson.XXXXXX) || exit 1
+   if python read_xml_batches.py --directory downloaded-result > "$tmp"; then
+       mv -f -- "$tmp" ./records.ndjson || { rm -f -- "$tmp"; exit 1; }
+   else
+       rm -f -- "$tmp"
+       exit 1
+   fi
+
+Only exit code 0 publishes the new export. A failed validation or incomplete
+stdout write leaves the old records.ndjson untouched. The final mv intentionally
+replaces that destination; choose another filename if you need both versions.
+Use one writer per destination. This pattern does not coordinate concurrent
+writers or guarantee recovery after power loss. A killed shell can leave a
+temporary file containing data: keep the directory private and remove abandoned
+records.ndjson.* files when no export is running. For the authenticated route,
+replace --directory downloaded-result with --run-id RUN_ID; keep the token in
+your secret manager. Re-reading existing output does not start an Actor, but
+storage downloads may consume platform usage.
+
 Checks and resource behavior
 The reader restricts cloud requests to api.apify.com, rejects redirects,
 requires a successful run of our XML Actor, and checks batch-key syntax,
