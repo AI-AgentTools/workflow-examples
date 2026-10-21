@@ -1,7 +1,7 @@
 AGENT TOOLS — HEIC and subtitle input recovery
 
 
-## Troubleshooting: fix the input before retrying
+## HEIC input recovery
 The run's key-value store may contain an `ERROR` record with an `error.code`.
 - `INVALID_BASE64`: send raw, standard base64 of the original file bytes. Remove a `data:image/heic;base64,` prefix; do not send a filename, URL or the bytes decoded as text. Do not change arbitrary characters to make validation pass.
 - `EXPECTED_IMAGE_BASE64_ONLY`: send exactly one JSON field, `imageBase64`.
@@ -12,7 +12,7 @@ The run's key-value store may contain an `ERROR` record with an `error.code`.
 If your HTTP request times out, first inspect the existing Apify run and its output. A timeout does not prove that conversion failed. Do not automatically start another run: this can duplicate processing and charges. A rejected input has no successful-conversion event; this is different from a successful run whose HTTP response was lost. Never publish source images, tokens or private output in support issues.
 
 
-## Troubleshooting: fix the input before retrying
+## SRT / WebVTT input recovery
 The run's key-value store may contain an `ERROR` record with an `error.code`.
 - `NON_POSITIVE_DURATION`: a cue ends at or before its start. Correct the source timing; the parser does not guess a replacement duration.
 - `MISSING_WEBVTT_HEADER` or `MISSING_HEADER_SEPARATOR`: for WebVTT, include the `WEBVTT` header and its blank-line separator. Setting `format` to `vtt` does not convert SRT syntax.
@@ -30,3 +30,21 @@ A complete sentence.
 If your HTTP request times out, inspect the existing Apify run and its dataset before retrying. A lost response may hide a successful, charged run. Automatic replacement runs can duplicate processing. A rejected file has no successful-parsing event; review its error and fix the input first. Use only synthetic, redacted excerpts when asking for support.
 
 Prepared 20 October 2026 from current parser error codes. See each live Actor README for current limits and behavior.
+
+## Audio or XML source cannot be downloaded
+An unsigned link to a private Apify storage record is not a publicly readable
+file. A successful upload alone does not prove that the Actor can fetch it.
+Use the accessible-record route documented by the Actor; do not paste your
+account API token into a source URL or make private storage public as a fix.
+For small audio files, AUDIO_GUIDE.txt documents the local --console-json
+helper that prepares base64 input. For XML, use the listing's signed-record
+recipe, or the inline synthetic example to check your configuration first.
+Signed links can grant access: treat them as secrets and redact support posts.
+Neither Actor fetches arbitrary web pages; changing a filename or repeatedly
+submitting the same inaccessible URL will not repair access.
+
+## XML reader certificate verification error
+The local Python reader needs a working CA trust bundle. XML_GUIDE.txt describes
+the tested Mac configuration and its limits. Repair the trust configuration;
+never disable HTTPS certificate verification. The reader uses an existing run
+and does not start paid processing again.
