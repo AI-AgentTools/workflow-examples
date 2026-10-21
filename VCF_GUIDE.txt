@@ -28,3 +28,30 @@ exclusive functionality or compatibility with every address-book exporter.
 Evidence: offline fixtures retain two phones, two emails and an Apple label.
 Your CRM integration is not tested by this example. A timed-out call may have
 started a paid run: inspect the existing run before retrying.
+
+
+Before enabling CRM writes
+1. Try a synthetic contact with two different phone numbers and two emails.
+   Verify the destination still contains every value after mapping, not just
+   that the Actor returned arrays. Keep source labels alongside each value.
+2. Review parser warnings and keep the original export available for comparison.
+   A parsed row is not proof that a number or address is current or belongs to
+   the intended person.
+3. Decide your matching policy before import. A source UID, when present, needs
+   a source/address-book namespace; do not assume the same UID from different
+   exports identifies the same person. Missing UIDs need an explicit policy.
+   Shared family emails and switchboard numbers are unsafe automatic merge keys.
+4. Preview proposed creates, updates and conflicts without writing. Route
+   ambiguous matches for review rather than merging or deleting contacts.
+5. Keep an import ledger keyed by source and your chosen stable identifier.
+   On retry, reconcile already completed writes instead of creating all rows
+   again. The Actor prepares contact data; it does not make CRM writes
+   idempotent or roll them back.
+6. Make replacement versus append behavior explicit. An absent input value
+   should not silently erase a manually maintained destination field. Test the
+   CRM's array and label behavior on synthetic contacts before bulk changes.
+
+Acceptance checklist: two phones retained, two emails retained, labels reviewed,
+ambiguous matches withheld, and replay of the same synthetic import produces
+no duplicate contact. These are checks for YOUR integration, not claims that
+this repository has tested a CRM or provides an automatic matching engine.
