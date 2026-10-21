@@ -36,6 +36,25 @@ Signed upload/API route
 6. Process in index order. Overlap repeats audio: deduplicate overlapping
    transcript words rather than blindly concatenating transcripts.
 
+Worked timestamp example (illustration, no transcription call)
+Suppose the manifest lists part 0 at start_seconds=0 and part 1 at
+start_seconds=299. With a 300-second first part, their overlap is [299,300).
+A word returned by your transcription provider at local 1.20 seconds in part 1
+belongs at recording time 299 + 1.20 = 300.20 seconds. For a segment with local
+start=0.40 and end=2.10, preserve the interval [299.40,301.10] seconds.
+Use each manifest chunk's actual start_seconds; do not calculate index * 300,
+because overlap and byte caps can change boundaries. Preserve fractional seconds.
+
+Overlap is context, not extra recording time. Keep both parts' text until you
+can align repeated words in the shared interval. Do not drop every segment that
+starts before the previous part ends: a segment can cross that boundary and
+contain new words. With word timestamps, compare the shared interval and retain
+one copy of matched words. With segment-only text, flag uncertain overlaps for
+your own reconciliation rather than claiming exact automatic deduplication.
+Do not deduplicate identical phrases at unrelated recording times.
+These arithmetic examples explain the manifest contract; they are not evidence
+of tested provider alignment, speech recognition quality or complete delivery.
+
 The script uploads to an unnamed Apify key-value store and obtains a record-level
 signed URL. It does not print the signature or put an account token into the URL.
 It saves sourceStoreId so you can manage input retention, and outputStoreId for
