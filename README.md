@@ -31,6 +31,7 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 - **Discord reports:** [validate and export ordered webhook bodies](DISCORD_GUIDE.txt), with an [offline adapter](discord_export_payloads.py) and [synthetic sample](discord-sample-dataset.json). No sending or webhook credentials required.
 - **Audio preparation:** [upload audio and obtain timestamped WAV parts](AUDIO_GUIDE.txt) with [prepare_audio.py](prepare_audio.py). Local inspection is free; `--submit` explicitly calls the paid Actor.
 - **XML batches:** [read and validate an existing result](XML_GUIDE.txt) with [read_xml_batches.py](read_xml_batches.py). No Actor is started by the reader.
+- **Subtitle search and summaries:** [keep source timestamps with transcript chunks](SUBTITLE_GUIDE.txt), with a verified synthetic input/output and local UTF-8 input recipe.
 - **Troubleshooting:** [HEIC and subtitle input checks](TROUBLESHOOTING.txt).
 
 Download this repository using **Code → Download ZIP**, extract it, and keep the guide and `examples.py` together. For n8n, import `n8n-telegram.json` and configure your own Apify Header Auth credential. The workflow contains synthetic input and no saved credentials. It prepares messages; it does not send them.
