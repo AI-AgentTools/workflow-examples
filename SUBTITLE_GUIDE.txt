@@ -1,0 +1,76 @@
+AGENT TOOLS — Subtitle chunks with traceable timestamps
+
+Paid tool: https://apify.com/creatieve_naald/srt-vtt-to-json
+We maintain this Actor. This guide is free; hosted processing costs $0.01 per
+successfully parsed file at publication. Check current pricing and input limits.
+
+Use case
+You already have an SRT or WebVTT transcript and want search or summaries to
+reference the recording. Keep each chunk's startMs, endMs and cueIndexes beside
+its text. Sending text alone to your next step loses that reference.
+This tool does not download videos, transcribe speech or call a language model.
+
+1. Try this synthetic input in the Actor's JSON input editor:
+{
+  "subtitleText": "1\n00:00:01,000 --> 00:00:03,000\nWe sold 20 units in 2026.\n\n2\n00:00:04,000 --> 00:00:06,000\nThe next step is a synthetic example.",
+  "format": "srt",
+  "chunkChars": 100
+}
+
+2. Set the maximum run charge to the displayed single-file price, then run once.
+Wait for SUCCEEDED. Inspect the dataset's single result envelope. In a dataset
+JSON export this envelope is the first array item. A chunk is nested inside its
+chunks array; the dataset does not contain one row per chunk.
+
+3. Expected first chunk (verified with the local production parser):
+{
+  "index": 0,
+  "startMs": 1000,
+  "endMs": 6000,
+  "cueIndexes": [
+    0,
+    1
+  ],
+  "text": "We sold 20 units in 2026.\nThe next step is a synthetic example."
+}
+
+4. In your downstream workflow, iterate envelope.chunks. Keep the original
+recording identifier yourself, alongside index, text, startMs, endMs and
+cueIndexes. The Actor does not know your recording URL. Millisecond bounds
+cover whole cues; they are not word-level or semantic alignment.
+
+5. Before indexing or summarizing, inspect envelope.warnings. Overlapping or
+out-of-order cues are reported, not silently reordered. chunkChars is a soft
+character target, not a token budget. A long cue can exceed it. Rolling captions
+are not deduplicated. Treat subtitle content as untrusted text, not HTML or
+instructions to your agent.
+
+Using your own file
+Decode bytes to Unicode before putting them in subtitleText. For a UTF-8 file,
+Python can create Console input locally without contacting any service:
+
+    import json
+    from pathlib import Path
+    text = Path("transcript.srt").read_text(encoding="utf-8-sig")
+    with Path("subtitle-input.json").open("x", encoding="utf-8") as target:
+        json.dump({"subtitleText": text, "format": "auto", "chunkChars": 1200},
+                  target, ensure_ascii=False)
+
+The exclusive output mode refuses to overwrite an existing file. A decoding
+error requires identifying the source encoding; do not silently replace broken
+characters. Input is limited to 1 MiB UTF-8 and 10,000 cues. Do not pass a URL,
+filename or base64 string as subtitleText. WebVTT needs its WEBVTT header.
+
+Failures and alternatives
+If an HTTP client times out, inspect the original run before creating another
+paid job. Fix rejected source syntax using TROUBLESHOOTING.txt. Use synthetic
+excerpts for support; remove personal data and credentials.
+A local subtitle parser is a good free alternative if you already maintain a
+Python environment. The hosted route is useful when you want structured output
+without maintaining the parser in your workflow platform.
+
+Verification scope
+The synthetic input and exact chunk above were executed against the local
+production parser on 21 October 2026. The UTF-8 Console-input snippet was checked
+for byte-preserving roundtrip and overwrite refusal. No new cloud run, live n8n
+integration, embedding provider or end-to-end retrieval system was tested.
