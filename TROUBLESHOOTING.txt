@@ -48,3 +48,35 @@ The local Python reader needs a working CA trust bundle. XML_GUIDE.txt describes
 the tested Mac configuration and its limits. Repair the trust configuration;
 never disable HTTPS certificate verification. The reader uses an existing run
 and does not start paid processing again.
+
+## HEIC: prepare JSON offline before using the Console
+With Python 3, run this in a private working directory containing photo.heic:
+
+```python
+import base64, json, os
+from pathlib import Path
+
+with Path("photo.heic").open("rb") as source:
+    raw = source.read(10_000_001)
+if not raw or len(raw) > 10_000_000:
+    raise ValueError("Use a nonempty file of at most 10,000,000 bytes")
+payload = {"imageBase64": base64.b64encode(raw).decode("ascii")}
+fd = os.open("heic-input.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+with os.fdopen(fd, "w", encoding="utf-8") as output:
+    json.dump(payload, output)
+```
+
+This reads at most 10,000,001 bytes to enforce the decoded-file byte limit and
+creates a NEW heic-input.json with restrictive permissions on POSIX systems.
+It refuses to overwrite an existing file; use a new filename or remove your
+own obsolete file deliberately. Check Windows permissions separately.
+The JSON contains a copy of your photo as base64: it is not encrypted. Keep it
+private and delete it according to your retention policy when no longer needed.
+
+In the Actor's Input JSON editor, replace the whole example input with this
+object, inspect current pricing and set your run cap before starting. Do not
+add a data:image/heic;base64, prefix or encode the base64 string again.
+This preparation performs no network request and no conversion. A filename
+and byte-size check cannot prove valid HEIC, supported bit depth, image count
+or pixel dimensions; those are validated by the Actor. Metadata removal from
+the resulting JPEG does not remove the source photo from input storage.
