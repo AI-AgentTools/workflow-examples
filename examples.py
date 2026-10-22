@@ -2,11 +2,16 @@
 import json, os, urllib.request
 from pathlib import Path
 
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Keep authenticated Actor requests on their original endpoint."""
+    def redirect_request(self, *args, **kwargs):
+        return None
+
 def call_actor(slug, field, text, price):
     url = f'https://api.apify.com/v2/acts/creatieve_naald~{slug}/run-sync-get-dataset-items?memory=256&timeout=20&maxTotalChargeUsd={price}'
     request = urllib.request.Request(url, data=json.dumps({field: text}).encode(), headers={'Authorization': 'Bearer '+os.environ['APIFY_TOKEN'], 'Content-Type': 'application/json'}, method='POST')
     # A timeout can mean the job ran. Never automatically start a replacement job.
-    with urllib.request.urlopen(request, timeout=35) as response:
+    with urllib.request.build_opener(NoRedirect).open(request, timeout=35) as response:
         rows = json.load(response)
     if not isinstance(rows,list) or len(rows)!=1 or rows[0].get('schema_version')!='1.0':
         raise ValueError('Unexpected response; inspect existing run before retrying')
