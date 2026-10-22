@@ -16,6 +16,17 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 | Audio needs splitting before your transcription step | [Audio Chunk Preparer](https://apify.com/creatieve_naald/audio-chunk-preparer) | Timestamped mono WAV parts; transcription stays with your provider |
 | XML is too large to pass through a workflow as one JSON object | [XML Record Batcher](https://apify.com/creatieve_naald/xml-record-batcher) | Ordered NDJSON batches of at most 1 MiB, preserving XML structure |
 
+## Explore without starting a paid run
+
+Download this repository using **Code → Download ZIP** and extract it first.
+
+- **Discord:** run `python3 discord_export_payloads.py discord-sample-dataset.json` to inspect synthetic webhook bodies. This validates output locally; it sends no messages and needs no token.
+- **Audio:** run `python prepare_audio.py recording.wav` with your own supported local file to inspect it without uploading. Only the explicit `--submit` route starts hosted processing.
+- **HEIC:** follow the [offline JSON preparation recipe](TROUBLESHOOTING.txt). It prepares input without uploading or converting a photo; format and pixel validation still happen in the Actor.
+- **XML:** if you already downloaded a result, use [the reader's offline mode](XML_GUIDE.txt). Obtaining a new hosted result is a separate paid step.
+
+Offline preparation does not prove that an eventual hosted run will accept your input. Keep generated files private. When you choose hosted processing, follow the price and run-cap checks below.
+
 ## Try one complete processing step
 
 1. Choose the tool above and read its current price, supported input and limits. Use its synthetic example first, not confidential data.
@@ -32,6 +43,7 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 - **Audio preparation:** [upload audio and obtain timestamped WAV parts](AUDIO_GUIDE.txt) with [prepare_audio.py](prepare_audio.py). Local inspection is free; `--submit` explicitly calls the paid Actor.
 - **XML batches:** [read and validate an existing result](XML_GUIDE.txt) with [read_xml_batches.py](read_xml_batches.py). No Actor is started by the reader.
 - **Subtitle search and summaries:** [keep source timestamps with transcript chunks](SUBTITLE_GUIDE.txt), with a verified synthetic input/output and local UTF-8 input recipe.
+- **HEIC input preparation:** [create bounded base64 JSON offline without overwriting an existing file](TROUBLESHOOTING.txt).
 - **Troubleshooting:** [HEIC and subtitle input checks](TROUBLESHOOTING.txt).
 
 Download this repository using **Code → Download ZIP**, extract it, and keep the guide and `examples.py` together. For n8n, import `n8n-telegram.json` and configure your own Apify Header Auth credential. The workflow contains synthetic input and no saved credentials. It prepares messages; it does not send them.
