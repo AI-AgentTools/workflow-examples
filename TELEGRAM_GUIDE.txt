@@ -30,3 +30,28 @@ maintaining one in your workflow environment. It does not guarantee delivery.
 The n8n example was tested locally using fixture responses, not a live end-to-end
 Apify-to-Telegram run. Existing separate Telegram acceptance is not proof of
 this complete workflow. We maintain the paid Actor linked above.
+
+Keep text and entity offsets together
+Telegram entity offsets and lengths use UTF-16 code units, not Python character
+indexes or UTF-8 byte counts. For text "😀 bold", the word "bold" starts at
+UTF-16 offset 3 and has length 4: the emoji occupies two units, the space one.
+An offset of 2 from Python's character index would select the wrong range.
+
+Offline arithmetic check (no token, network or message):
+   text = "😀 bold"
+   prefix = text[:text.index("bold")]
+   offset = len(prefix.encode("utf-16-le")) // 2
+   length = len("bold".encode("utf-16-le")) // 2
+   assert (offset, length) == (3, 4)
+
+After preparation, do not prepend a heading, trim whitespace, normalize text,
+replace characters or slice a message while reusing its original entities.
+Such edits can invalidate offsets even if the message still looks similar.
+Prefer applying your desired text changes BEFORE preparation. Your sender adds
+chat_id separately and sends each returned text/entities pair unchanged, in
+order, without parse_mode. If you must edit prepared text, regenerate and
+validate its entities instead of adding a guessed offset to every entity.
+
+This example checks indexing arithmetic only. It does not establish Telegram
+rendering, supported formatting combinations or actual delivery. A downstream
+sender remains responsible for credentials, rate limits and ambiguous retries.
