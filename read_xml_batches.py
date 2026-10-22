@@ -61,6 +61,8 @@ def stage(manifest, fetch, destination):
         raw = fetch(part['recordKey'])
         if not isinstance(raw, bytes) or len(raw) != part['bytes'] or hashlib.sha256(raw).hexdigest() != part['sha256']:
             raise InvalidResult('Batch size or digest mismatch')
+        if not raw.endswith(b'\n'):
+            raise InvalidResult('Batch must end with a newline')
         rows = raw.splitlines()
         if len(rows) != part['records']:
             raise InvalidResult('Batch count mismatch')
