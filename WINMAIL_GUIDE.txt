@@ -31,11 +31,25 @@ Review the live listing before use; standalone storage/download costs may apply.
    proof of file authenticity or safety: keep your scanning/approval steps.
 
 ## Your own file without a mailbox connection
-On a machine or workflow where you already hold the attachment, base64-encode
-its binary bytes, then supply exactly {"tnefBase64":"STANDARD_BASE64"} as input.
+Use the approved environment that already holds your attachment. The free
+[prepare_winmail.py input helper](https://github.com/AI-AgentTools/workflow-examples/blob/main/prepare_winmail.py)
+needs Python 3.9+ and no extra packages. Download it and run:
+
+    python3 prepare_winmail.py "/approved/path/winmail.dat" --output winmail-input.private.json
+
+This creates the exact {"tnefBase64":"STANDARD_BASE64"} input JSON without
+uploading, extracting or starting a run. It checks the raw TNEF signature and
+4 MiB size limit, refuses non-regular input and never overwrites an existing
+output or the source. POSIX output permissions are owner-only (0600); other
+systems use their filesystem permissions. Signature checks do not validate
+all TNEF content or scan malware; a damaged container may still be rejected.
+
+Open the new JSON in the Actor's Input JSON editor, review the price/cap in the
+first-step instructions above, then start only when you choose paid processing.
 Do not send a filename, data-URL prefix or account token as the file value.
-Keep any generated input JSON private; base64 is not encryption. The hosted
-service stores input/output under your account retention settings.
+Keep generated input JSON private; base64 is not encryption. The example
+repository ignores winmail-input*.json, but arbitrary names elsewhere are not
+protected by that rule. Hosted input/output follows your account retention.
 
 For n8n, download the attachment as binary, convert binary to base64, map it to
 tnefBase64 and use an asynchronous Actor call. Wait for success and consume the
