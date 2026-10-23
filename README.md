@@ -4,10 +4,15 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 
 **Turn awkward files and long messages into structured inputs your next workflow step can use.** Agent Tools provides small, bounded processing APIs on Apify, with reusable Python and n8n examples.
 
+## Files stuck inside winmail.dat?
+
+[Extract the attachments with Winmail.dat Attachment Extractor](https://apify.com/creatieve_naald/winmail-dat-extractor) — **USD 0.03 per successfully extracted input file**, not per attachment. No mailbox login is needed. [Follow the first-run guide](WINMAIL_GUIDE.txt) for supported input, a capped run and verified downloads. If you control the sender, changing Outlook's message format may avoid TNEF altogether.
+
 ## Find your starting point
 
 | Your workflow gets stuck here | Use this tool | What you get |
 | --- | --- | --- |
+| An email contains winmail.dat instead of the files your workflow needs | [Winmail.dat Attachment Extractor](https://apify.com/creatieve_naald/winmail-dat-extractor) | Attachment bytes, safe storage keys and a checksum manifest |
 | A contact has several phone numbers or email addresses | [VCF to JSON](https://apify.com/creatieve_naald/vcard-to-json) | Structured contact fields without keeping only the first value |
 | A generated report is too long for Telegram | [Telegram Message Preparer](https://apify.com/creatieve_naald/telegram-message-preparer) | Ordered text and entity payloads for your sender |
 | Your next step needs JPEG instead of an iPhone HEIC image | [HEIC to JPEG](https://apify.com/creatieve_naald/heic-to-jpeg-for-ai) | A resized JPEG from supported single-image HEIC input |
@@ -37,6 +42,7 @@ Offline preparation does not prove that an eventual hosted run will accept your 
 
 ## Examples and setup
 
+- **Winmail.dat:** [recover attachments in one bounded processing step](WINMAIL_GUIDE.txt); no mailbox connection or file delivery is included.
 - **vCard import:** [preserve multiple phones, emails and labels](VCF_GUIDE.txt) with the Python adapter in [examples.py](examples.py).
 - **Telegram reports:** [prepare ordered text/entities payloads](TELEGRAM_GUIDE.txt) using Python or the [importable n8n workflow](n8n-telegram.json).
 - **Discord reports:** [validate and export ordered webhook bodies](DISCORD_GUIDE.txt), with an [offline adapter](discord_export_payloads.py) and [synthetic sample](discord-sample-dataset.json). No sending or webhook credentials required.
@@ -63,6 +69,10 @@ Keep tokens in environment variables or workflow credentials, never in exported 
 
 ## Support and license
 
-Report example problems here with synthetic reproductions. Report hosted Actor problems on its Apify Issues tab. Remove personal data, API tokens and signed links. Custom integrations and bespoke processing are outside scope.
+For a script or guide problem, use the [example problem form](https://github.com/AI-AgentTools/workflow-examples/issues/new?template=example-problem.yml). GitHub sign-in is required. Include the example filename/revision, Python or workflow version, a minimal **invented** input, expected result and redacted actual result. You do not need to start a paid run to report an example problem.
+
+For a failed **hosted Actor run**, open that Actor's listing from the table above and use its **Issues** tab. A successful Actor run followed by a failure in an example script belongs in this repository instead. Actual CRM writes, message delivery and transcription-provider behavior remain the responsibility of your downstream integration.
+
+Issues are public. Remove personal data, API tokens, webhook URLs, signed links and private paths before submitting. Do not attach original contact exports, recordings or source messages. Share only the smallest synthetic reproduction. Custom integrations and bespoke processing are outside scope.
 
 See [LICENSE.txt](LICENSE.txt) and [RIGHTS.txt](RIGHTS.txt). The license covers original examples and explanations only, not third-party software, trademarks or hosted services. Prepared with AI assistance.

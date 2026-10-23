@@ -1,0 +1,60 @@
+# Extract attachments trapped inside winmail.dat
+
+[Open Winmail.dat Attachment Extractor on Apify](https://apify.com/creatieve_naald/winmail-dat-extractor)
+
+Use this when your email-to-document workflow receives an Outlook TNEF
+(winmail.dat) attachment instead of the files it needs. We maintain this paid
+Actor. USD0.03 per successfully extracted input file, all attachments included.
+Review the live listing before use; standalone storage/download costs may apply.
+
+## Decide whether this fits
+- One raw winmail.dat, at most4MiB, up to100attachments and4MiB extracted bytes.
+- No mailbox login, source URL fetching, MSG/EML parsing, decryption or nested
+  Outlook message extraction. It does not render the email body or scan malware.
+- If you control the sender, changing Outlook to HTML/plain text may eliminate
+  TNEF. Free local tnefparse or Apache POI HMEF may suit a self-managed workflow.
+- Use hosted extraction when you prefer a bounded step with existing Apify
+  access and downloadable output, rather than maintaining a decoder.
+
+## First successful processing step
+1. Open the Actor's Input tab. Its example is synthetic; try that before
+   confidential material. Review the current USD0.03 event price and set
+   maximum total charge to USD0.03. A successful example is still a paid run.
+2. Start only when you choose to pay for that processing. Wait for SUCCEEDED.
+   A timeout does not prove failure: inspect the existing run before retrying.
+3. Open that run's Output/dataset manifest. It lists files with index, filename,
+   recordKey, bytes and sha256. Download the binary records from the SAME run's
+   key-value store, using each generated recordKey (for example attachment-001.bin).
+   Do not derive storage keys from original filenames or overwrite existing files.
+4. Check downloaded byte counts and SHA-256 against the manifest before passing
+   files downstream. Preserve record order where relevant. Extraction is not
+   proof of file authenticity or safety: keep your scanning/approval steps.
+
+## Your own file without a mailbox connection
+On a machine or workflow where you already hold the attachment, base64-encode
+its binary bytes, then supply exactly {"tnefBase64":"STANDARD_BASE64"} as input.
+Do not send a filename, data-URL prefix or account token as the file value.
+Keep any generated input JSON private; base64 is not encryption. The hosted
+service stores input/output under your account retention settings.
+
+For n8n, download the attachment as binary, convert binary to base64, map it to
+tnefBase64 and use an asynchronous Actor call. Wait for success and consume the
+manifest plus binary records before your next document-processing step.
+This is a recipe, not a verified n8n Cloud template. It does not send mail.
+
+## If it fails
+NOT_TNEF: obtain the raw winmail.dat. INVALID_BASE64: use standard base64 without
+a prefix. BAD_CHECKSUM/TRUNCATED_ATTRIBUTE: obtain a complete attachment.
+INPUT_LIMIT/COUNT_LIMIT: use a local decoder for larger input. Embedded messages
+are unsupported. Do not keep retrying an unchanged rejected input.
+Rejected input has no successful extraction event; that does not imply every
+standalone account service is free.
+
+## Evidence and support
+Existing owner acceptance covered synthetic small input, the4MiB boundary,
+checksum rejection and a spending cap below the event price. Successful file
+bytes/hashes were checked. These are owner tests, not independent customer
+payments, broad Outlook compatibility or an end-to-end n8n claim.
+Report hosted failures on the Actor's Issues tab using only synthetic details.
+For this guide use the repository's example problem form. Never attach private
+mail, tokens, webhook URLs, signed links or raw account responses.
