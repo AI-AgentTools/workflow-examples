@@ -8,6 +8,8 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 
 [Extract the attachments with Winmail.dat Attachment Extractor](https://apify.com/creatieve_naald/winmail-dat-extractor) — **USD 0.03 per successfully extracted input file**, not per attachment. No mailbox login is needed. [Follow the first-run guide](WINMAIL_GUIDE.txt) for supported input, a capped run and verified downloads. If you control the sender, changing Outlook's message format may avoid TNEF altogether.
 
+**Not sure you need hosted extraction?** [Choose whether to ask for a resend, extract locally or automate](https://agenttoolsworkflows.wordpress.com/2026/10/23/winmail-dat-resend-or-extract/) before starting a run. For a recurring workflow, [read the manifest, verification and retry pattern](https://agenttoolsworkflows.wordpress.com/2026/10/23/winmail-dat-attachment-workflow/). These Agent Tools notes include free alternatives and disclose our paid tool.
+
 ## Find your starting point
 
 | Your workflow gets stuck here | Use this tool | What you get |
