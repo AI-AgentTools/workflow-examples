@@ -55,3 +55,10 @@ Acceptance checklist: two phones retained, two emails retained, labels reviewed,
 ambiguous matches withheld, and replay of the same synthetic import produces
 no duplicate contact. These are checks for YOUR integration, not claims that
 this repository has tested a CRM or provides an automatic matching engine.
+
+
+Visual walkthrough and pre-import decision checklist:
+https://agent-tools-workflows.creatieve-naald.chatgpt.site/guides/vcard-import-without-losing-fields/
+The Agent Tools guide explains repeated-field mapping, ambiguous matches and
+replay checks with invented data. It includes a free local option and discloses
+our paid hosted tool. It does not claim to test or automate your CRM writes.
