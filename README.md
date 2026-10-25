@@ -45,7 +45,7 @@ Offline preparation does not prove that an eventual hosted run will accept your 
 ## Examples and setup
 
 - **Winmail.dat:** [recover attachments in one bounded processing step](WINMAIL_GUIDE.txt); no mailbox connection or file delivery is included.
-- **vCard import:** [preserve multiple phones, emails and labels](VCF_GUIDE.txt) with the Python adapter in [examples.py](examples.py).
+- **vCard import:** [preserve multiple phones, emails and labels](VCF_GUIDE.txt) with the Python adapter in [examples.py](examples.py). Before CRM writes, use our [mapping, matching and safe-replay checklist](https://agent-tools-workflows.creatieve-naald.chatgpt.site/guides/vcard-import-without-losing-fields/). It includes a free local route and discloses our paid tool.
 - **Telegram reports:** [prepare ordered text/entities payloads](TELEGRAM_GUIDE.txt) using Python or the [importable n8n workflow](n8n-telegram.json).
 - **Discord reports:** [validate and export ordered webhook bodies](DISCORD_GUIDE.txt), with an [offline adapter](discord_export_payloads.py) and [synthetic sample](discord-sample-dataset.json). No sending or webhook credentials required.
 - **Audio preparation:** [upload audio and obtain timestamped WAV parts](AUDIO_GUIDE.txt) with [prepare_audio.py](prepare_audio.py). Local inspection is free; `--submit` explicitly calls the paid Actor.
