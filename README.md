@@ -27,6 +27,8 @@ Free, reusable examples for small AI and automation workflows. We maintain the *
 
 Download this repository using **Code → Download ZIP** and extract it first.
 
+- **Contacts:** inspect [the invented vCard sample](contact-import-sample.vcf) offline: two phone numbers, two email addresses and a grouped `Desk` label. Downloading or reading the file starts no hosted run. Use only a destination test environment if you choose to test an import; the repository does not write to a CRM. [Review the expected checks](VCF_GUIDE.txt#before-enabling-crm-writes).
+
 - **Discord:** run `python3 discord_export_payloads.py discord-sample-dataset.json` to inspect synthetic webhook bodies. This validates output locally; it sends no messages and needs no token.
 - **Audio:** run `python prepare_audio.py recording.wav` with your own supported local file to inspect it without uploading. Only the explicit `--submit` route starts hosted processing.
 - **HEIC:** follow the [offline JSON preparation recipe](TROUBLESHOOTING.txt). It prepares input without uploading or converting a photo; format and pixel validation still happen in the Actor.
