@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+UID:urn:uuid:00000000-0000-4000-8000-000000000001
+FN:Example Contact
+N:Contact;Example;;;
+item1.TEL;TYPE=WORK:+12025550101
+item1.X-ABLabel:Desk
+TEL;TYPE=CELL:+12025550102
+EMAIL;TYPE=WORK:work@example.com
+EMAIL;TYPE=HOME:home@example.com
+NOTE:Synthetic demonstration only. Do not import into a production address book.
+END:VCARD
