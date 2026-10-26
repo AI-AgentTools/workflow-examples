@@ -3,6 +3,13 @@ Keep multiple phone numbers when importing a vCard into a workflow
 Problem: mapping only the first phone or email can discard useful contact data.
 Our VCF Actor returns arrays and retains original fields and warnings.
 
+Downloadable synthetic input: contact-import-sample.vcf in this repository.
+Expected source values: two TEL fields, two EMAIL fields, and the grouped Desk
+label. The phones and addresses are invented examples, not customer data.
+Opening the file starts no hosted run; a manual CRM import would change that
+destination, so use only a test environment. Exporter/CRM compatibility and the
+fixture's hosted execution have not been verified. Use the checklist below.
+
 Use examples.py from this folder:
 
 from pathlib import Path
