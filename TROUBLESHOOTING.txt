@@ -12,6 +12,25 @@ The run's key-value store may contain an `ERROR` record with an `error.code`.
 If your HTTP request times out, first inspect the existing Apify run and its output. A timeout does not prove that conversion failed. Do not automatically start another run: this can duplicate processing and charges. A rejected input has no successful-conversion event; this is different from a successful run whose HTTP response was lost. Never publish source images, tokens or private output in support issues.
 
 
+## HEIC: try a free Mac export before a hosted run
+If you only need a JPEG copy of a few photos on a Mac, Preview may already
+cover the task. In Preview, open the image, choose File > Export, pick JPEG,
+and save under a new name to retain the source. No Apify run is needed for
+this route. Apple's guide covers quality controls and selecting multiple files:
+https://support.apple.com/guide/preview/convert-image-file-types-prvw1012/mac
+
+Renaming .heic to .jpg does not convert the image data. After export, inspect
+orientation, colour and image quality in the destination application.
+Do not assume a local export removed location or other private metadata;
+check the output before sharing it.
+
+We maintain the paid hosted HEIC tool. It is an optional processing step for
+an automated workflow, not a prerequisite for a one-off Preview export.
+For hosted use, inspect current pricing, input limits and storage settings.
+Apple documentation checked28October2026; no Mac conversion or new hosted
+run was executed for this addition.
+
+
 ## SRT / WebVTT input recovery
 The run's key-value store may contain an `ERROR` record with an `error.code`.
 - `NON_POSITIVE_DURATION`: a cue ends at or before its start. Correct the source timing; the parser does not guess a replacement duration.
