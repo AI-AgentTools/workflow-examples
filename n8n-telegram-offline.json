@@ -1,0 +1,72 @@
+{
+  "name": "Telegram payload validation - offline synthetic fixture",
+  "active": false,
+  "nodes": [
+    {
+      "id": "start",
+      "name": "Run manually",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "5bcf674b-cbb1-4b43-9d26-e17d00350893",
+      "name": "Invented result only",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "// Invented fixture only. No network request, hosted Actor or Telegram delivery.\nconst sample = [\n  {\n    \"schema_version\": \"1.0\",\n    \"message_count\": 2,\n    \"messages\": [\n      {\n        \"index\": 1,\n        \"text\": \"Hello 😀 world\",\n        \"entities\": [\n          {\n            \"type\": \"bold\",\n            \"offset\": 9,\n            \"length\": 5\n          }\n        ]\n      },\n      {\n        \"index\": 2,\n        \"text\": \"Second synthetic part.\",\n        \"entities\": []\n      }\n    ],\n    \"warnings\": []\n  }\n];\nreturn sample.map(json => ({json}));"
+      }
+    },
+    {
+      "id": "validate",
+      "name": "Validate and expose ordered payloads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const rows = $input.all().map(item => item.json);\nif (rows.length !== 1) throw new Error('Expected one result; inspect the existing Apify run before retrying.');\nconst result = rows[0];\nif (result.schema_version !== '1.0' || !Array.isArray(result.messages) || result.messages.length < 1 || result.messages.length > 20 || result.message_count !== result.messages.length) throw new Error('Unexpected result schema.');\nreturn result.messages.map((m, i) => {\n  if (m.index !== i + 1 || typeof m.text !== 'string' || !m.text.trim() || m.text.length > 4096 || !Array.isArray(m.entities)) throw new Error('Invalid message or sequence.');\n  for (const e of m.entities) {\n    if (!Number.isInteger(e.offset) || !Number.isInteger(e.length) || e.offset < 0 || e.length < 1 || e.offset + e.length > m.text.length) throw new Error('Invalid UTF-16 entity bounds.');\n  }\n  return {json: {sequence: m.index, text: m.text, entities: m.entities, warnings: result.warnings || []}};\n});"
+      }
+    }
+  ],
+  "connections": {
+    "Run manually": {
+      "main": [
+        [
+          {
+            "node": "Invented result only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invented result only": {
+      "main": [
+        [
+          {
+            "node": "Validate and expose ordered payloads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}
