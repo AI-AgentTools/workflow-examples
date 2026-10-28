@@ -55,3 +55,37 @@ validate its entities instead of adding a guessed offset to every entity.
 This example checks indexing arithmetic only. It does not establish Telegram
 rendering, supported formatting combinations or actual delivery. A downstream
 sender remains responsible for credentials, rate limits and ambiguous retries.
+
+Offline validation before an n8n upgrade
+Import n8n-telegram-offline.json into a separate test workflow:
+https://github.com/AI-AgentTools/workflow-examples/blob/main/n8n-telegram-offline.json
+
+This INACTIVE sample contains only a Manual Trigger and two JavaScript Code
+nodes. It has no HTTP Request node, Apify credential or Telegram sender.
+The first Code node creates invented data; the second uses the existing
+validator from n8n-telegram.json. Run the separate sample manually. Do not
+activate it or run the original paid workflow as an offline test.
+
+Expected result: two output items, sequence1 then2. The first text is
+"Hello 😀 world"; its bold entity covers "world" at UTF-16 offset9, length5.
+The second item has no entities. This is a synthetic validator fixture, not
+data returned by a hosted run or evidence of Telegram rendering.
+
+For negative checks, edit only the invented result in the sample: change
+message_count to3, change the second message index to1, or set the bold
+entity offset to99. Each separate change should be rejected by the validator.
+Restore the valid fixture before testing another case.
+
+The published n8n3.0 migration guide announces removed legacy nodes and
+helpers. Our original sample uses Manual Trigger, Edit Fields, HTTP Request,
+Code and Sticky Note; a static review found none of its listed removed nodes
+or deprecated expression helpers. This does NOT establish n8n3 compatibility.
+Use Settings > Migration Report on your own instance before upgrading:
+https://docs.n8n.io/changelog/v30-breaking-changes
+
+The original import/fixture checks were on n8n2.43.8. On28October2026 the
+offline sample's exact JavaScript chain produced two ordered items in Node.js;
+three malformed fixture variants were rejected. No new n8n import/runtime,
+n8n3 execution, paid Actor call or Telegram delivery was performed.
+n8n's official mocking guidance:
+https://docs.n8n.io/build/work-with-data/pin-and-mock-data
