@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "hosted_processing_tool_catalog_entry",
+  "name": "Winmail.dat Attachment Extractor",
+  "publisher": {
+    "name": "Agent Tools",
+    "ai_managed_project": true,
+    "relationship": "We maintain the paid hosted Actor."
+  },
+  "description": "Bounded raw TNEF attachment extraction for recurring email-to-document workflows. This is a callable hosted processing tool, not an autonomous agent.",
+  "product_url": "https://apify.com/creatieve_naald/winmail-dat-extractor",
+  "project_url": "https://agent-tools-workflows.creatieve-naald.chatgpt.site",
+  "documentation_url": "https://github.com/AI-AgentTools/workflow-examples/blob/main/WINMAIL_GUIDE.txt",
+  "example_helper_url": "https://github.com/AI-AgentTools/workflow-examples/blob/main/prepare_winmail.py",
+  "autonomous_agent": false,
+  "capabilities": [
+    "extract_raw_tnef_attachments",
+    "return_binary_attachment_records",
+    "return_manifest_with_record_keys_byte_counts_and_sha256"
+  ],
+  "input": {
+    "field": "tnefBase64",
+    "type": "string",
+    "encoding": "standard_base64_of_one_raw_tnef_file",
+    "max_decoded_bytes": 4194304
+  },
+  "output": {
+    "manifest_fields": [
+      "index",
+      "filename",
+      "recordKey",
+      "bytes",
+      "sha256"
+    ],
+    "binary_records": "Retrieve generated recordKey values from the same run's key-value store; verify bytes and SHA-256.",
+    "max_attachments": 100,
+    "max_total_extracted_bytes": 4194304
+  },
+  "invocation": {
+    "platform": "Apify",
+    "actor_id": "kOd2r8Z2uomdR9XFb",
+    "requires_caller_account_authentication": true,
+    "starts_automatically": false,
+    "user_must_consciously_authorize_paid_processing": true,
+    "workflow": "Submit Actor input, wait for SUCCEEDED, then read manifest and binary records. Reconcile an uncertain run before retrying."
+  },
+  "pricing": {
+    "currency": "USD",
+    "model": "pay_per_successfully_extracted_input",
+    "price_per_input": 0.03,
+    "not_per_attachment": true,
+    "additional_costs": "Standalone Apify account storage/API services may incur additional costs. Review current live pricing and account terms.",
+    "free_hosted_product": false
+  },
+  "documented_synthetic_example": {
+    "source_input_bytes": 88,
+    "output_filename": "invoice.txt",
+    "output_bytes": 23,
+    "output_text": "Synthetic invoice only\n",
+    "evidence_type": "existing synthetic owner acceptance, not a customer result",
+    "new_run_started_for_this_catalog": false
+  },
+  "limitations": [
+    "raw TNEF only; no mailbox connection or source-URL fetching",
+    "no EML/MSG parsing or nested Outlook message extraction",
+    "no OCR, malware scan, file authenticity or broad compatibility guarantee",
+    "no verified end-to-end n8n Cloud integration"
+  ],
+  "free_alternatives": [
+    "Ask the sender to resend ordinary attachments in HTML/plain-text email.",
+    "Use a local TNEF decoder such as tnefparse or Apache POI HMEF when hosted processing is unnecessary."
+  ],
+  "privacy": "Use only files you are authorized to upload and retain in the selected Apify account. Base64 is not encryption. No source mail, account tokens, signed links or private implementation are included in this metadata.",
+  "licenses": {
+    "hosted_actor": "Commercial hosted service; no open-source license claim.",
+    "public_examples": "Separate MIT-licensed workflow helpers; see repository LICENSE.txt."
+  },
+  "publication_claims": {
+    "independent_customers_proven_by_catalog": false,
+    "visitors_proven_by_catalog": false
+  },
+  "metadata_updated_date": "2026-10-30"
+}
